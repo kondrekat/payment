@@ -2,13 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { TabsModule } from 'ngx-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { HistoryComponent } from './components/history/history.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 
 const appRoutes: Routes = [
   { path: 'card', component: CardComponent },
@@ -25,8 +24,7 @@ const appRoutes: Routes = [
     AppComponent,
     CardComponent,
     HistoryComponent,
-    PageNotFoundComponent,
-    NavigationComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +33,8 @@ const appRoutes: Routes = [
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
     ),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@
   </div>
 </nav>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 <div class="container">
   <div class="row">
     <div class="col">
@@ -26,16 +26,16 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <input type="text" ngModel required #sn1="ngModel" name="sn1" class="form-control" placeholder="0000" pattern="[0-9]{4}">
+                  <input type="text"  required formControlName="sn1" class="form-control" placeholder="0000" pattern="[0-9]{4}">
                 </div>
                 <div class="col">
-                  <input type="text" ngModel required #sn2="ngModel" name="sn2" class="form-control" placeholder="0000" pattern="[0-9]{4}">
+                  <input type="text"  required formControlName="sn2" class="form-control" placeholder="0000" pattern="[0-9]{4}">
                 </div>
                 <div class="col">
-                  <input type="text" ngModel required #sn3="ngModel" name="sn3" class="form-control" placeholder="0000" pattern="[0-9]{4}">
+                  <input type="text"  required formControlName="sn3" class="form-control" placeholder="0000" pattern="[0-9]{4}">
                 </div>
                 <div class="col">
-                  <input type="text" ngModel required #sn4="ngModel" name="sn4" class="form-control" placeholder="0000" pattern="[0-9]{4}">
+                  <input type="text"  required formControlName="sn4" class="form-control" placeholder="0000" pattern="[0-9]{4}">
                 </div>
               </div>
               <div class="row">
@@ -48,13 +48,13 @@
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <input type="text" ngModel required #name="ngModel" name="name" class="form-control" placeholder="ФИО">
+                  <input type="text"  required formControlName="name" class="form-control" placeholder="ФИО">
                 </div>
                 <div class="col-md-3">
-                  <input type="text" ngModel required #endMonth="ngModel" name="endMonth" class="form-control" placeholder="01">
+                  <input type="text"  required formControlName="endMonth" class="form-control" placeholder="01">
                 </div>
                 <div class="col-md-3">
-                  <input type="text" ngModel required #endYear="ngModel" name="endYear" class="form-control" placeholder="20">
+                  <input type="text"  required formControlName="endYear" class="form-control" placeholder="20">
                 </div>
               </div>
           </div>
@@ -73,16 +73,16 @@
               </div>
               <div class="row">
               <div class="col">
-                <input type="text" ngModel required #dn1="ngModel" name="dn1" class="form-control" placeholder="0000">
+                <input type="text"  required formControlName="dn1" class="form-control" placeholder="0000">
               </div>
               <div class="col">
-                <input type="text" ngModel required #dn2="ngModel" name="dn2" class="form-control" placeholder="0000">
+                <input type="text"  required formControlName="dn2" class="form-control" placeholder="0000">
               </div>
               <div class="col">
-                <input type="text" ngModel required #dn3="ngModel" name="dn3" class="form-control" placeholder="0000">
+                <input type="text"  required formControlName="dn3" class="form-control" placeholder="0000">
               </div>
               <div class="col">
-                <input type="text" ngModel required #dn4="ngModel" name="dn4" class="form-control" placeholder="0000">
+                <input type="text"  required formControlName="dn4" class="form-control" placeholder="0000">
               </div>
             </div>
           </div>
@@ -93,9 +93,11 @@
   <div class="form-inline">
     <div class="form-group mx-sm-3 mb-2">
       <label for="money">Сумма</label>
-      <input type="number" class="form-control" ngModel required #money="ngModel" name="money" placeholder="Сумма">
+      <input type="number" class="form-control" required formControlName="money" placeholder="Сумма">
     </div>
-    <button type="submit" class="btn btn-primary mb-2" [disabled]="f.invalid">Перевести</button>
+    <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">Перевести</button>
   </div>
 </div>
 </form>
+
+<p>{{ t | json }}</p>

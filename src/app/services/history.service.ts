@@ -19,7 +19,7 @@ export class HistoryService {
     if (!items) items = [];
     items.push(transaction);
     localStorage.setItem(KEY, JSON.stringify(items));
-    console.log(Array.from(JSON.parse(localStorage.getItem(KEY))));
+    this.clear();
   }
 
   getAllTransactions(): Transaction[] {
@@ -37,8 +37,11 @@ export class HistoryService {
     this.transaction.next(items[i]);
   }
 
-  getTransaction(): Observable<Transaction> {;
-    console.log('getTransaction');
+  clear() {
+    this.transaction.next(null);
+  }
+
+  getTransaction(): Observable<Transaction> {
     return this.transaction.asObservable();
   }
 

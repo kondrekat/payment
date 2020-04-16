@@ -4,5 +4,5 @@ export class Transaction {
     summ: number;
     date: Date;
     name: string;
-    endDate: Date;
+    endDate: string;
 }

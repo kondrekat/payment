@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { Transaction } from 'src/app/classes/transaction';
 import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
@@ -13,26 +11,64 @@ import { HistoryService } from 'src/app/services/history.service';
 })
 export class CardComponent implements OnInit {
   subscription: Subscription;
+  t: any
+   form = new FormGroup({
+    sn1: new FormControl(''),
+    sn2: new FormControl(''),
+    sn3: new FormControl(''),
+    sn4: new FormControl(''),
+    dn1: new FormControl(''),
+    dn2: new FormControl(''),
+    dn3: new FormControl(''),
+    dn4: new FormControl(''),
+    name: new FormControl(''),
+    money: new FormControl(''),
+    endMonth: new FormControl(''),
+    endYear: new FormControl(''),
+  });
 
-  constructor(private router: Router, private historyService: HistoryService) { 
-    this.subscription = this.historyService.getTransaction().subscribe(t => { console.log('t') }, t => { console.log('e') });
+  constructor(private historyService: HistoryService) { 
+    this.subscription = this.historyService.getTransaction().subscribe(t => { 
+      if (t) {
+        this.form.controls['sn1'].setValue(t.srcCardNumber.slice(0, 4)); 
+        this.form.controls['sn2'].setValue(t.srcCardNumber.slice(4, 8)); 
+        this.form.controls['sn3'].setValue(t.srcCardNumber.slice(8, 12)); 
+        this.form.controls['sn4'].setValue(t.srcCardNumber.slice(12, 16)); 
+        this.form.controls['dn1'].setValue(t.dstCardNamber.slice(0, 4)); 
+        this.form.controls['dn2'].setValue(t.dstCardNamber.slice(4, 8)); 
+        this.form.controls['dn3'].setValue(t.dstCardNamber.slice(8, 12)); 
+        this.form.controls['dn4'].setValue(t.dstCardNamber.slice(12, 16)); 
+        this.form.controls['name'].setValue(t.name); 
+        this.form.controls['money'].setValue(t.summ);
+        this.form.controls['endMonth'].setValue(t.endDate.slice(0, 2));
+        this.form.controls['endYear'].setValue(t.endDate.slice(2, 4));
+      } else {
+        this.form.controls['sn1'].setValue(null); 
+        this.form.controls['sn2'].setValue(null); 
+        this.form.controls['sn3'].setValue(null); 
+        this.form.controls['sn4'].setValue(null); 
+        this.form.controls['dn1'].setValue(null); 
+        this.form.controls['dn2'].setValue(null); 
+        this.form.controls['dn3'].setValue(null); 
+        this.form.controls['dn4'].setValue(null); 
+        this.form.controls['name'].setValue(null); 
+        this.form.controls['money'].setValue(null);
+        this.form.controls['endMonth'].setValue(null);
+        this.form.controls['endYear'].setValue(null);
+      }
+    });
   }
 
   ngOnInit() {
   }
 
-  onSelect(event:any): void {
-    console.log('onSelect card', event);
-    // this.router.navigate(['/history']);
-  }
-
-  onSubmit(f: NgForm) {
+  onSubmit() {
     this.historyService.addTransaction({
-      srcCardNumber: f.value.sn1+f.value.sn2+f.value.sn3+f.value.sn4,
-      dstCardNamber: f.value.dn1+f.value.dn2+f.value.dn3+f.value.dn4,
-      name: f.value.name,
-      summ: f.value.money,
-      endDate: f.value.endMonth+f.value.endYear,
+      srcCardNumber: this.form.value.sn1 + this.form.value.sn2 + this.form.value.sn3 + this.form.value.sn4,
+      dstCardNamber: this.form.value.dn1 + this.form.value.dn2 + this.form.value.dn3 + this.form.value.dn4,
+      name: this.form.value.name,
+      summ: this.form.value.money,
+      endDate: this.form.value.endMonth + this.form.value.endYear,
       date: new Date()
     });
   }

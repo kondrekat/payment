@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/card">Создание перевода</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link">История</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      №
+    </div>
+    <div class="col-2">
+      Карта плательщика
+    </div>
+    <div class="col-2">
+      Карта получателя
+    </div>
+    <div class="col-2">
+      Сумма
+    </div>
+    <div class="col-2">
+      Дата выполения
+    </div>
+    <div class="col-3">
+      Действия
+    </div>
+  </div>
+  <div class="row" *ngFor="let t of transations; index as i">
+    <div class="col-1">
+      {{i + 1}}
+    </div>
+    <div class="col-2">
+      {{t.srcCardNumber}}
+    </div>
+    <div class="col-2">
+      {{t.dstCardNamber}}
+    </div>
+    <div class="col-2">
+      {{t.summ}}
+    </div>
+    <div class="col-2">
+      {{t.date | date:'shortDate'}}
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-outline-primary btn-sm" (click)="repeat(i)">Повторить</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" (click)="remove(i)">Удалить</button>
+    </div>
+  </div>
+</div>

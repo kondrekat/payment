@@ -13,7 +13,7 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 <div class="container">
-  <div class="row">
+  <div class="row card-wrapper">
     <div class="col">
       <div class="card">
         <div class="card-body">
@@ -92,7 +92,7 @@
   </div>
   <div class="form-inline">
     <div class="form-group mx-sm-3 mb-2">
-      <label for="money">Сумма</label>
+      <label for="money" class="money-label">Сумма</label>
       <input type="number" class="form-control" required formControlName="money" placeholder="Сумма">
     </div>
     <button type="submit" class="btn btn-primary mb-2" [disabled]="!form.valid">Перевести</button>

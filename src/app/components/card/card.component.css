@@ -9,3 +9,14 @@
 .money-label {
     margin-right: 20px;
 }
+
+.ng-valid {
+    border-color: green;
+} 
+
+.ng-invalid.ng-touched {
+    border-color: red;
+} 
+
+
+
